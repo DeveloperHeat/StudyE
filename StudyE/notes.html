@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes</title>
+  <link rel="icon" type="image/x-icon" href="book.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <script src="https://use.fontawesome.com/a31a3f8384.js"></script>
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body onscroll="scroll()">
+  <script src="script.js"></script>
+  <header id="header">
+    <a href="index.html" class="logo"><i class='bx bxs-graduation'></i>StudyE</a>
+
+    <ul class="navbar" id="n">
+      <li><a href="index.html">Study Skills</a></li>
+      <li><a href="notes.html" class="notes" style="color: yellow">Notes</a></li>
+      <li><a href="flashcards.html" class="notes">Flashcards</a></li>
+      <li><a href="timetable.html" class="timetable">Timetable</a></li>
+    </ul>
+    <span class="header-icons">
+      <i class='bx bxs-quote-right' onclick="quote()"></i>
+      <i class='bx bx-menu' class="menu-item" onclick="menu()" id="menu"></i>
+    </span>
+  </header>
+
+  <section class="home">
+    <span class="home-img">
+      <img src="https://cdn.glitch.global/ed94c34a-9482-4ab4-9d44-f6be51f8471d/lightbulb.png?v=1706384850258">
+    </span>
+    <span class="home-text">
+      <h1>Study Skills</h1><br />
+      <h2>At Your Doorstep</h2>
+    </span>
+  </section>
+  <section class="one" id="one">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br/>
+    <br/>
+    <span class="entire" id="entire">
+      <span class="text-header">
+        <button type="button" class="btn" data-element="bold"><i class="fa fa-bold"></i></button>
+        <button type="button" class="btn" data-element="italic"><i class="fa fa-italic"></i></button>
+        <button type="button" class="btn" data-element="insertParagraph"><i class="fa fa-paragraph"></i></button>
+        <button type="button" class="btn" data-element="save"><i class="fa fa-save"></i></button>
+        <button type="button" class="btn" data-element="createLink"><i class="fa fa-link"></i></button>
+        <button type="button" class="btn" data-element="justifyLeft"><i class="fa fa-align-left"></i></button>
+        <button type="button" class="btn" data-element="justifyCenter"><i class="fa fa-align-center"></i></button>
+        <button type="button" class="btn" data-element="justifyRight"><i class="fa fa-align-right"></i></button>
+        <button type="button" class="btn" data-element="insertImage"><i class="fa fa-image"></i></button>
+      </span>
+      <div class="content" id="content" contenteditable="true" style="height: 500px; overflow: auto"></div>
+    </span>
+  </section>
+  <footer class="footerOne" id="footerOne">
+    Made By Yogesh
+  </footer>
+  <script>
+
+    // Declaring variables
+    let menu = document.getElementById('menu');
+    let navbar = document.getElementById('n');
+    let header = document.getElementById("header");
+    let one = document.getElementById("one");
+    let x;
+    let adding = document.getElementById("add");
+    let b = document.getElementById("box");
+    let cTents = document.getElementById("content");
+
+    // If the menu icon is clicked, then change the menu icon to an x         icon and open the vertical navbar links on the phone
+    menu.onclick = () => {
+      menu.classList.toggle('bx-x');
+      navbar.classList.toggle('open');
+    }
+
+    // If the screen width is less than 890 pixels, then display the          menu icon otherwise do not display
+    if (screen.width < 890) {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+    }
+
+    // Keep the same colour as it has in its orginal position when you scroll
+    function scroll() {
+      header.style.background = "radial-gradient(50% 220.53% at 10.23% 125%, gold -220%, #019273)";
+
+    }
+
+    // If the screen width is greater than 600px and less that 1000px, change the height of the one section to 600px
+    if (screen.width > 600 && screen.width < 1000) {
+      one.style.height = "600px";
+      cTents.style.height = "450px";
+    }
+
+    // If the screen width is greater than 1000px, change the height of the one section to 700px
+    if (screen.width > 1000) {
+      one.style.height = "700px";
+      cTents.style.height = "400px";
+    }
+
+    // If the screen width is greater than 600px and less than 400px, change the height of the one section to 800px
+    if (screen.width < 600 && screen.width > 400) {
+      one.style.height = "800px";
+      cTents.style.height = "500px";
+    }
+
+    // If the screen width is less than 400px, change the height of the one section to 900px
+    if (screen.width < 400) {
+      one.style.height = "900px";
+     
+    }
+
+    // Declaring the elements variable and gets the class btn
+    let elements = document.querySelectorAll(".btn");
+
+
+    // Get all elements with the class "make" and add a click event listener to each one
+    elements.forEach(function (make) {
+      make.addEventListener("click", function () {
+        // Get the value of the "data-element" attribute for the clicked     element
+        let select = make.dataset['element'];
+
+        // If the clicked element is a link button, prompt the user for a URL and insert the link into the document
+        if (select == "createLink") {
+          let url = prompt("Enter the link:");
+          navigator.clipboard.writeText(url);
+          document.execCommand(select, false, url);
+        }
+        // If the clicked element is an image button, prompt the user for an image URL and insert the image into the document
+        else if (select == "insertImage") {
+          let url = prompt("Enter the image URL:");
+          navigator.clipboard.writeText(url);
+          let img = new Image();
+          img.onload = function () {
+            // Calculate the appropriate width and height for the image based on the window size
+            let scale = Math.min(window.innerWidth / img.width, window.innerHeight / img.height);
+            let width;
+            let height;
+            if (img.width < innerWidth) {
+              width = img.width / scale;
+              height = img.height / scale;
+            } else if (img.width > innerWidth) {
+              width = img.width * scale;
+              height = img.height * scale;
+            }
+            // Insert the image into the document with the appropriate width and height
+            document.execCommand('insertHTML', false, `<img src="${url}" width="${width}" height="${height}">`);
+          }
+          img.src = url;
+        }
+        // If the clicked element is a save button, save the contents of the #content element to local storage
+        else if (select == "save") {
+          localStorage.setItem('content', document.getElementById('content').innerHTML);
+          // Display a confirmation message
+          swal('Content saved!');
+        }
+        // For all other elements, execute the document.execCommand method with the provided value
+        else {
+          document.execCommand(select, false, null);
+        }
+      })
+    })
+
+    // When the window is loaded, retrieve the contents of the #content element from local storage (if they exist)
+    window.onload = function () {
+      let content = localStorage.getItem('content');
+      if (content) {
+        // Set the #content element's innerHTML to the retrieved content
+        document.getElementById('content').innerHTML = content;
+      }
+    }
+    function quote() {
+
+      // Declaring the quotes array which contains all the quotes
+      let quotes = ["Hard work may lead to either success or failure, but not working hard will only lead to failure.",
+        "Hard work and success are not friends; you need to work hard to make them like each other.",
+        "How hard should one work in life? That's like asking, 'How successful do you want to be?' There is no limit.",
+        "Two tablespoons of determination, one tablespoon of goals, and generous quantities of hard work—this is the recipe for success.",
+        "Hard work is the toll-free highway that links failure to success.",
+        "Blaming luck for your failure is like crediting luck for your success. If you want to credit hard work for your success, blame the lack of it for your failure.",
+        "Hard work is the gas that drives your car, called 'Life,' to its destination—'Success.'",
+        "Expecting success without hard work is like asking someone else to work out at the gym for you.",
+        "The ingredients of hard work are pain, sweat, and suffering. Yet, the taste of success is one of the sweetest things known to humankind.",
+        "Hard work is the only shortcut to success.",
+        "You will never be able to succeed if you don't give it your best shot. You will never be able to give your best shot if you don't work hard.",
+        "Stop complaining about how you can't make it. Start thinking about how you can, and work hard at it.",
+        "Working hard today will allow you to work less tomorrow.",
+        "Luck may come and go, but the fruits of hard work will remain with you forever."];
+
+      // Declaring the random variable which picks a random number from 0-13
+      let random = Math.floor(Math.random() * quotes.length);
+      // Say the chosen quote in a dialog box.
+      swal(quotes[random]);
+    }  
+  </script>
+</body>
+
+</html>

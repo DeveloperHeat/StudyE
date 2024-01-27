@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudyE</title>
+  <link rel="icon" type="image/x-icon" href="book.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body onscroll="scroll()">
+  <script src="script.js"></script>
+  <header id="header">
+    <a href="index.html" class="logo"><i class="bx bxs-graduation"></i>StudyE</a>
+
+    <ul class="navbar" id="n">
+      <li><a href="index.html" style="color: yellow">Study Skills</a></li>
+      <li><a href="notes.html" class="notes">Notes</a></li>
+      <li><a href="flashcards.html" class="notes">Flashcards</a></li>
+      <li><a href="timetable.html" class="timetable">Timetable</a></li>
+    </ul>
+    <span class="header-icons">
+      <i class="bx bxs-quote-right" onclick="quote()"></i>
+      <i class="bx bx-menu" class="menu-item" onclick="menu()" id="menu"></i>
+    </span>
+  </header>
+  <section class="home">
+    <span class="home-img">
+      <img src="https://cdn.glitch.global/ed94c34a-9482-4ab4-9d44-f6be51f8471d/lightbulb.png?v=1706384850258" alt="lightbulb">
+    </span>
+    <span class="home-text">
+      <h1>Study Skills</h1><br />
+      <h2>At Your Doorstep</h2>
+    </span>
+  </section>
+  <section class="one" id="one">
+    <br />
+    <br />
+    <h2 class="headingOne" style="margin-top: 5%;">
+      Flashcards.
+    </h2>
+    <br />
+    <br />
+    <table>
+      <tr>
+        <td>
+          Flashcards are a versatile study tool that can be used for simple facts as well as complex processes
+          throughout one’s academic career. They are effective because they leverage the learning power of active
+          recall, metacognition, and spaced repetition. Active recall is when you try to retrieve information from
+          memory. Flashcards engage metacognition by allowing you to monitor your own learning and adjust your study
+          strategies accordingly. Flashcards allow for confidence-based repetition which means that you can repeat the
+          cards that you don’t know as well more frequently than those that you do know well. </td>
+        <td>
+          <img src="https://cdn.glitch.global/ed94c34a-9482-4ab4-9d44-f6be51f8471d/flashcard.png?v=1706384857955" style="margin-left: 30%;" class="flash" id="fla">
+        </td>
+      </tr>
+    </table>
+    <span class="mImg"></span>
+  </section>
+  <section class="two" id="two" style="background-color: #019273;">
+    <br />
+    <br />
+    <h2 class="headingOne" style="margin-top: 5%;">
+      Note Taking.
+    </h2>
+    <br />
+    <br />
+    <table>
+      <tr>
+        <td>
+
+          Note-taking promotes positive memory as well as the ability to retain information because the mind becomes an
+          active component in studying. It also helps you grasp more information in than what you normally would as you
+          actively paying attention to what is being taught.
+          <br />
+          <br />
+          When you take notes, you’re processing information. You’re highlighting facts, connecting the dots, and
+          breaking down a big topic into small chunks. Engaging actively with the information increases chances of
+          recollecting some if not all of it later on
+        </td>
+        <td>
+          <img src="https://cdn.glitch.global/ed94c34a-9482-4ab4-9d44-f6be51f8471d/notes.png?v=1706384838921" style="margin-left: 30%;" class="flash" id="not">
+        </td>
+      </tr>
+    </table>
+    <span class="mImg"></span>
+
+  </section>
+  <section class="three" id="three">
+    <br />
+    <br />
+    <h2 class="headingOne" style="margin-top: 5%;">
+      Study Timetable
+    </h2>
+    <br />
+    <br />
+    <table>
+      <tr>
+        <td>
+          Creating a study timetable can help you plan your study schedule and make the most of your time. It can help
+          you stay organized and focused on your studies, which can lead to better grades and less stress. A study
+          timetable can also help you identify areas where you need to spend more time studying and areas where you can
+          afford to spend less time.
+          <br /><br />
+          In addition, creating a study timetable can help you develop good time management skills. By setting aside
+          specific times for studying, you can avoid procrastination and ensure that you have enough time to complete
+          all of your assignments and prepare for exams.
+        </td>
+        <td>
+          <img src="https://cdn.glitch.global/ed94c34a-9482-4ab4-9d44-f6be51f8471d/calendar.png?v=1706384866875" style="margin-left: 30%;" class="flash" id="stu">
+        </td>
+      </tr>
+    </table>
+    <span class="mImg"></span>
+  </section>
+  <footer class="footerOne" id="footerOne">
+    Made By Yogesh
+  </footer>
+  <script>
+    // Get the necessary HTML elements
+    let menu = document.getElementById('menu');
+    let navbar = document.getElementById('n');
+    let header = document.getElementById("header");
+    let one = document.getElementById("one");
+    let two = document.getElementById("two");
+    let three = document.getElementById("three");
+    let footerOne = document.getElementById("footerOne");
+    let f = document.getElementById("fla");
+    let n = document.getElementById("not");
+    let s = document.getElementById("stu");
+
+    // Toggle the open class on the navbar when the menu is clicked
+    menu.onclick = () => {
+      menu.classList.toggle('bx-x');
+      navbar.classList.toggle('open');
+    }
+
+    // Set menu display based on screen width
+    if (screen.width < 890) {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+      console.log(screen.width);
+    }
+
+    // Set header background on scroll
+    function scroll() {
+      header.style.background = "radial-gradient(50% 220.53% at 10.23% 125%, gold -220%, #019273)";
+    }
+
+    // Set section heights and hide elements based on screen width
+    if (screen.width > 780 && screen.width < 1000) {
+      one.style.height = "550px";
+      two.style.height = "550px";
+      three.style.height = "550px"
+      footerOne.style.height = "50px";
+      footerOne.style.marginTop = "3%";
+      f.style.display = "none";
+      n.style.display = "none";
+      s.style.display = "none";
+    }
+
+    if (screen.width > 1000) {
+      one.style.height = "500px";
+      two.style.height = "500px";
+      three.style.height = "500px"
+      footerOne.style.height = "50px"
+      footerOne.style.marginTop = "2%";
+    }
+
+    if (screen.width < 780 && screen.width > 600) {
+      one.style.height = "600px";
+      two.style.height = "600px";
+      three.style.height = "600px";
+      footerOne.style.height = "50px"
+      footerOne.style.marginTop = "4%";
+      f.style.display = "none";
+      n.style.display = "none";
+      s.style.display = "none";
+    }
+
+    if (screen.width < 600 && screen.width > 400) {
+      one.style.height = "850px";
+      two.style.height = "800px";
+      three.style.height = "850px";
+      footerOne.style.height = "50px"
+      footerOne.style.marginTop = "5%";
+      f.style.display = "none";
+      n.style.display = "none";
+      s.style.display = "none";
+      console.log("better!")
+    }
+
+    if (screen.width < 400) {
+      one.style.height = "900px";
+      two.style.height = "900px";
+      three.style.height = "1000px";
+      footerOne.style.height = "50px"
+      footerOne.style.marginTop = "6%";
+      f.style.display = "none";
+      n.style.display = "none";
+      s.style.display = "none";
+    }
+
+    // Log message for debugging
+    console.log("done")
+
+  </script>
+  <script>
+    function quote() {
+
+      // Declaring the quotes array which contains all the quotes
+      let quotes = ["Hard work may lead to either success or failure, but not working hard will only lead to failure.",
+        "Hard work and success are not friends; you need to work hard to make them like each other.",
+        "How hard should one work in life? That's like asking, 'How successful do you want to be?' There is no limit.",
+        "Two tablespoons of determination, one tablespoon of goals, and generous quantities of hard work—this is the recipe for success.",
+        "Hard work is the toll-free highway that links failure to success.",
+        "Blaming luck for your failure is like crediting luck for your success. If you want to credit hard work for your success, blame the lack of it for your failure.",
+        "Hard work is the gas that drives your car, called 'Life,' to its destination—'Success.'",
+        "Expecting success without hard work is like asking someone else to work out at the gym for you.",
+        "The ingredients of hard work are pain, sweat, and suffering. Yet, the taste of success is one of the sweetest things known to humankind.",
+        "Hard work is the only shortcut to success.",
+        "You will never be able to succeed if you don't give it your best shot. You will never be able to give your best shot if you don't work hard.",
+        "Stop complaining about how you can't make it. Start thinking about how you can, and work hard at it.",
+        "Working hard today will allow you to work less tomorrow.",
+        "Luck may come and go, but the fruits of hard work will remain with you forever."];
+
+      // Declaring the random variable which picks a random number from 0-13
+      let random = Math.floor(Math.random() * quotes.length);
+      // Say the chosen quote in a dialog box.
+      swal(quotes[random]);
+    }  
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flashcards</title>
+  <link rel="icon" type="image/x-icon" href="book.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body onscroll="scroll()">
+  <script src="script.js"></script>
+  <header id="header">
+    <a href="index.html" class="logo"><i class='bx bxs-graduation'></i>StudyE</a>
+
+    <ul class="navbar" id="n">
+      <li><a href="index.html">Study Skills</a></li>
+      <li><a href="notes.html" class="notes">Notes</a></li>
+      <li><a href="flashcards.html" class="notes" style="color: yellow">Flashcards</a></li>
+      <li><a href="timetable.html" class="timetable">Timetable</a></li>
+    </ul>
+    <span class="header-icons">
+      <i class='bx bxs-quote-right' onclick="quote()"></i>
+      <i class='bx bx-menu' class="menu-item" onclick="menu()" id="menu"></i>
+    </span>
+  </header>
+
+  <section class="home">
+    <span class="home-img">
+      <img src="https://cdn.glitch.global/ed94c34a-9482-4ab4-9d44-f6be51f8471d/lightbulb.png?v=1706384850258">
+    </span>
+    <span class="home-text">
+      <h1>Study Skills</h1><br />
+      <h2>At Your Doorstep</h2>
+    </span>
+  </section>
+  <section class="one" id="one">
+    <br />
+    <br />
+    <h2 class="headingOne" style="text-align: center;">Flashcards</h2>
+    <br />
+    <br />
+    <span class="box" id="box"
+      style="display: block; width: 50%; margin: auto; padding: 20px; box-shadow: 5px 5px 5px #888888;">
+      <h2 style="text-align: center;">Create</h2><br />
+      <label for="question">Question</label>
+      <textarea id="question" style="resize: none" maxlength="100"></textarea>
+      <br>
+      <label for="answer">Answer</label>
+      <textarea id="answer" style="resize: none" maxlength="30"></textarea>
+      <span>
+        <button onclick="add()" id="add">Save</button>
+        <button onclick="deleteAll()" id="delete">Delete All</button>
+      </span>
+    </span>
+    <br />
+    <br />
+    <span class="flashcards"></span>
+  </section>
+  <footer class="footerOne" id="footerOne">
+    Made By Yogesh
+  </footer>
+  <script>
+
+    // Declaring variables
+    let menu = document.getElementById('menu');
+    let navbar = document.getElementById('n');
+    let header = document.getElementById("header");
+    let one = document.getElementById("one");
+    let adding = document.getElementById("add");
+    let footerOne = document.getElementById("footerOne");
+
+    // If the menu icon is clicked, then change the menu icon to a x        icon and open the vertical navbar links on the phone
+    menu.onclick = () => {
+      menu.classList.toggle('bx-x');
+      navbar.classList.toggle('open');
+    }
+
+    // If the screen width is less than 890 pixels, then display the          menu icon otherwise do not display
+    if (screen.width < 890) {
+      menu.style.display = "block";
+    } else {
+      menu.style.display = "none";
+      console.log(screen.width);
+    }
+
+    // Keep the same colour as it has in its orginal position when you scroll
+    function scroll() {
+      header.style.background = "radial-gradient(50% 220.53% at 10.23% 125%, gold -220%, #019273)";
+
+    }
+
+    // If the screen width is greater than 780px and less than 1000px, change the height of the one section to 1400px
+    if (screen.width > 780 && screen.width < 1000) {
+      one.style.height = "550px";
+    }
+
+    // If the screen width is greater than 1000px, change the height of the one section to 500px
+    if (screen.width > 1000) {
+      one.style.height = "500px";
+    }
+
+    // If the screen width is greater than 600px and less than 780px, change the height of the one section to 600px
+    if (screen.width < 780 && screen.width > 600) {
+      one.style.height = "600px";
+    }
+
+    // If the screen width is greater than 600px and less than 400px, change the height of the one section to 800px
+    if (screen.width < 600 && screen.width > 400) {
+      one.style.height = "800px";
+    }
+
+    // If the screen width is less than 400px, change the height of the one section to 900px
+    if (screen.width < 400) {
+      one.style.height = "900px";
+    }
+
+    // Get the cards and box elements from the HTML
+    let cards = document.querySelector(".flashcards");
+    let box = document.querySelector(".box");
+
+    // Get the question and answer input elements and any saved content from local storage
+    let question = document.getElementById("question");
+    let answer = document.getElementById("answer");
+    let content = JSON.parse(localStorage.getItem("items")) || [];
+
+    let clickCount = 0;
+
+    // Create a flashcard for each item in the "content" array
+    for (let i = 0; i < content.length; i++) {
+      create(content[i]);
+
+      // Set the section height based on the screen width
+      if (screen.width > 1000) {
+        one.style.height = " 1600px";
+      }
+
+      if (screen.width > 780 && screen.width < 1000) {
+        one.style.height = " 2100px";
+      }
+
+      if (screen.width > 600 && screen.width < 780) {
+        one.style.height = " 2400px";
+      }
+
+      if (screen.width < 600 && screen.width > 400) {
+        one.style.height = " 3000px";
+      }
+
+      if (screen.width < 400) {
+        console.log("what")
+        one.style.height = " 2900px";
+      }
+    }
+
+    // Create a new flashcard with the given text
+    function create(text) {
+      let span = document.createElement("div");
+      let h2_question = document.createElement("h2");
+      let h2_answer = document.createElement("h2");
+
+      // Set the class name and style for the flashcard elements
+      span.className = "flashcard";
+      h2_question.setAttribute("style", "border-top: 1px solid red; padding: 15px; margin-top: 30px");
+
+      // Set the question and answer text for the flashcard
+      h2_question.innerHTML = text.question;
+      h2_answer.setAttribute("style", "text-align: center; display: none; color: red;");
+      h2_answer.innerHTML = text.answer;
+
+      // Add the question and answer elements to the flashcard
+      span.appendChild(h2_question);
+      span.appendChild(h2_answer);
+
+      // Add a click event listener to toggle the display of the answer
+      span.addEventListener("click", function () {
+        if (h2_answer.style.display == "none") {
+          h2_answer.style.display = "block"
+        } else {
+          h2_answer.style.display = "none";
+        }
+      });
+
+      // Add the flashcard to the cards element
+      cards.appendChild(span);
+    }
+
+    // Clear all flashcards and saved content
+    function deleteAll() {
+      localStorage.clear();
+      cards.innerHTML = "";
+      content = [];
+      clickCount = 0;
+    }
+
+    // Add a new flashcard with the current question and answer input values
+    function add() {
+      // Check if the maximum number of flashcards has been reached
+      if (content.length >= 10) {
+        swal("You can only save 10 flashcards.");
+        return;
+      }
+      
+      // Create a new flashcard with the current question and answer input values
+      let flashcard_info = {
+        "question": question.value,
+        "answer": answer.value
+      };
+
+      // Trims the question and answer input values to remove leading and trailing spaces
+      let trimmedQuestion = question.value.trim();
+      let trimmedAnswer = answer.value.trim();
+      
+  // Checks if the question and answer inputs are empty or filled with space bars
+      if (trimmedQuestion != "" && trimmedAnswer != "") {
+   // Add the new flashcard to the content array and save to local storage
+      content.push(flashcard_info);
+      localStorage.setItem("items", JSON.stringify(content));
+         // Create the new flashcard and clear the question and answer input values
+      create(flashcard_info);
+      swal("Flashcard Created!");
+      question.value = "";
+      answer.value = "";
+      }   else {
+        swal("A question or answer is missing. Please type an input in for both the question and an answer ");
+        return false;
+      } 
+
+      
+
+      
+      // Set the section height based on the screen width
+      if (screen.width > 1000) {
+        one.style.height = " 1600px";
+      } else if (screen.width > 780 && screen.width < 1000) {
+        one.style.height = "2400px";
+        console.log("2400px")
+      }
+
+      if (screen.width > 600 && screen.width < 780) {
+        one.style.height = " 2400px";
+      }
+
+      if (screen.width > 600 && screen.width < 400) {
+        one.style.height = " 3000px";
+      }
+
+      if (screen.width < 400) {
+        console.log("what")
+        one.style.height = " 3300px";
+      }
+
+      clickCount++;
+    }
+    function quote() {
+
+      // Declaring the quotes array which contains all the quotes
+      let quotes = ["Hard work may lead to either success or failure, but not working hard will only lead to failure.",
+        "Hard work and success are not friends; you need to work hard to make them like each other.",
+        "How hard should one work in life? That's like asking, 'How successful do you want to be?' There is no limit.",
+        "Two tablespoons of determination, one tablespoon of goals, and generous quantities of hard work—this is the recipe for success.",
+        "Hard work is the toll-free highway that links failure to success.",
+        "Blaming luck for your failure is like crediting luck for your success. If you want to credit hard work for your success, blame the lack of it for your failure.",
+        "Hard work is the gas that drives your car, called 'Life,' to its destination—'Success.'",
+        "Expecting success without hard work is like asking someone else to work out at the gym for you.",
+        "The ingredients of hard work are pain, sweat, and suffering. Yet, the taste of success is one of the sweetest things known to humankind.",
+        "Hard work is the only shortcut to success.",
+        "You will never be able to succeed if you don't give it your best shot. You will never be able to give your best shot if you don't work hard.",
+        "Stop complaining about how you can't make it. Start thinking about how you can, and work hard at it.",
+        "Working hard today will allow you to work less tomorrow.",
+        "Luck may come and go, but the fruits of hard work will remain with you forever."];
+
+      // Declaring the random variable which picks a random number from 0-13
+      let random = Math.floor(Math.random() * quotes.length);
+      // Say the chosen quote in a dialog box.
+      swal(quotes[random]);
+    }  
+  </script>
+
+</body>
+
+</html>
